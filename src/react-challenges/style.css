@@ -1,0 +1,16 @@
+button{
+    padding: 12px;
+    margin-right: 5px;
+}
+
+.red{
+    background-color: red;
+    color: aliceblue;
+}
+.green{
+    background-color: green;
+    color: aliceblue;
+}
+.yellow{
+    background-color: yellow;
+}
