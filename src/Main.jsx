@@ -1,6 +1,6 @@
-import React from "react";
+import React, { createElement } from "react";
 import ReactDOM from "react-dom/client";
-import { heroes } from "./data/heroes";
+import heroes from "./data/heroes";
 import { App } from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </div>
       );
     })}*/}
-    <App/>
+    <App />
   </>
 );
 
@@ -96,6 +96,7 @@ const [nombre, setNombre] = useState("Ler");
 console.log(nombre);
 setNombre();
 
+//objects methods
 const {
   namePerson,
   anios,
@@ -114,3 +115,39 @@ const getElementByOwner = (owner) => {
 
 console.log(getElementById(2));
 console.log(getElementByOwner("DC"));
+
+//promises
+
+const getHeroeByIdAsync = (id) => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      const hero = getElementById(id);
+      if (hero) {
+        res(hero);
+      } else {
+        rej("Heroe, no existe...");
+      }
+    }, 2000);
+  });
+};
+
+getHeroeByIdAsync(10).then(console.log).catch(console.log);
+
+// fetch API
+
+const apiKey = "9iKJ39jM3fXblLy1PFl5cW62wRv1U7al";
+const peticion = fetch(
+  "https://api.giphy.com/v1/gifs/random?api_key=" + apiKey
+);
+
+peticion
+  .then((res) => res.json()
+  .then(({data}) => {
+    const {url} = data.images.original;
+    
+    const img = document.createElement('img')
+    img.src = url;
+    document.body.append(img);
+
+  }))
+  .catch(console.warn);
